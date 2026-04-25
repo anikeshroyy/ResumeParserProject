@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth; scroll-padding-top: 8.5rem;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./src/output.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f1ad598525.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <meta name="theme-color" content="#1E3A8A"> <!-- Tailwind blue-900 -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- Favicon & App Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon_io/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon_io/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="./assets/favicon_io/site.webmanifest" />
+    <title>HireLens</title>
+</head>
+
+<body class="bg-gray-900 text-white" x-data="{ 
+        isMobileMenuOpen: false,
+        showNav: true, 
+        lastY: 0 
+    }" @scroll.window="
+        const y = window.scrollY;
+        if (y < 200 || y < lastY) { showNav = true; } 
+        else { showNav = false; }
+        lastY = y;
+    " :class="{ 'overflow-hidden': isMobileMenuOpen }">
+    <!-- =======================================================HEADER SECTION================================================== -->
+    <header x-data="{ showNav: true, lastY: 0 }" @scroll.window="
+            const y = window.scrollY;
+            if (y < 200 || y < lastY) { showNav = true; } 
+            else { showNav = false; }
+            lastY = y;
+        " :class="{ '!-translate-y-full': !showNav }"
+        class="sticky top-0 z-40 w-full transition-transform duration-300 ease-in-out">
+        <nav class="w-full h-20 bg-gray-900/80 backdrop-blur-lg border-b border-gray-500/30">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-3">
+                    <img src="./assets/logo.png" class="h-8" alt="HireLens Logo" />
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">HireLens</span>
+                </a>
+
+                <!-- Desktop Nav & Action Buttons -->
+                <div class="flex items-center md:order-2 space-x-3">
+                    <button type="button"
+                        class="hidden sm:inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center">
+                        Get started
+                    </button>
+                    <!-- Mobile Hamburger Button -->
+                    <button @click="isMobileMenuOpen = !isMobileMenuOpen" type="button"
+                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 z-50">
+                        <span class="sr-only">Open main menu</span>
+                        <svg x-show="!isMobileMenuOpen" class="w-5 h-5" fill="none" viewBox="0 0 17 14"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 1h15M1 7h15M1 13h15" />
+                        </svg>
+                        <svg x-show="isMobileMenuOpen" x-cloak class="w-5 h-5 text-white" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
+                    <ul class="flex flex-col md:flex-row md:space-x-8 font-medium text-gray-300">
+                        <li><a href="#home"
+                                class="block py-2 px-3 hover:text-blue-500 rounded md:p-0 transition-colors">Home</a>
+                        </li>
+                        <li><a href="#features"
+                                class="block py-2 px-3 hover:text-blue-500 rounded md:p-0 transition-colors">Features</a>
+                        </li>
+                        <li><a href="#about"
+                                class="block py-2 px-3 hover:text-blue-500 rounded md:p-0 transition-colors">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div x-show="isMobileMenuOpen" x-cloak x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0" class="fixed inset-0 z-30 bg-gray-900/95 backdrop-blur-lg md:hidden">
+        <ul class="flex flex-col items-center justify-center h-full space-y-8 text-2xl font-medium text-gray-300">
+            <li><a href="#home" @click="isMobileMenuOpen = false" class="transition-colors hover:text-blue-500">Home</a>
+            </li>
+            <li><a href="#features" @click="isMobileMenuOpen = false"
+                    class="transition-colors hover:text-blue-500">Features</a></li>
+            <li><a href="#about" @click="isMobileMenuOpen = false"
+                    class="transition-colors hover:text-blue-500">About</a></li>
+            <li><a href="#"
+                    class="inline-block text-white bg-blue-700 hover:bg-blue-800 rounded-lg text-lg px-6 py-3 text-center mt-8">Get
+                    Started</a></li>
+        </ul>
+    </div>
+
+
+    <!-- =======================================================HERO SECTION================================================== -->
+    <div class="relative isolate px-2 -mt-15 lg:-mt-25 pt-2 lg:px-5">
+        <div aria-hidden="true"
+            class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
+            <div style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+                class="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-288.75">
+            </div>
+        </div>
+        <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+            <div class="text-center">
+                <h1 class="text-5xl font-semibold tracking-tight text-balance text-white sm:text-5xl">From Resume to
+                    Dream Career, Instantly</h1>
+                <p class="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">Turn your resume into
+                    opportunities — discover jobs that perfectly match your skills and experience.</p>
+            </div>
+        </div>
+        <div aria-hidden="true"
+            class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
+            <div style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+                class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-288.75">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =======================================================UPLOAD SECTION================================================== -->
+    <div class="max-w-xl -mt-25 lg:-mt-35 w-full mx-auto px-4" x-data="fileUpload()">
+        <div class="relative flex flex-col items-center justify-center p-8 transition-colors duration-300 ease-in-out border-2 border-dashed rounded-xl"
+            :class="{
+                'border-gray-500': !isDragging && !file,
+                'border-blue-500 bg-blue-900/20': isDragging,
+                'border-green-500': file && isPdf,
+                'border-red-500': file && !isPdf
+            }" @dragover.prevent="isDragging = true" @dragleave.prevent="isDragging = false"
+            @drop.prevent="handleDrop($event)">
+            <!-- File Info / Upload Icon -->
+            <div class="text-center">
+                <!-- PDF Icon -->
+                <template x-if="file && isPdf">
+                    <svg class="mx-auto h-16 w-16 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </template>
+                <!-- Invalid File Icon -->
+                <template x-if="file && !isPdf">
+                    <svg class="mx-auto h-16 w-16 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                    </svg>
+                </template>
+                <!-- Upload Icon -->
+                <template x-if="!file">
+                    <svg class="mx-auto h-16 w-16 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 16.5V9.75m0 0l-3.75 3.75M12 9.75l3.75 3.75M17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" />
+                    </svg>
+                </template>
+            </div>
+
+            <!-- Main Text -->
+            <p class="mt-4 lg:text-xl text-sm font-medium text-gray-200" x-show="!file">
+                Drag & drop your resume here
+            </p>
+            <p class="mt-2 text-sm text-gray-400" x-show="!file">
+                or <label for="fileInput" class="text-blue-400 hover:text-blue-500 font-semibold cursor-pointer">choose
+                    file</label> to
+                upload from your device
+            </p>
+
+            <!-- File Name & Status -->
+            <div class="mt-4 text-center" x-show="file" x-cloak>
+                <p class="font-medium text-gray-200" x-text="file?.name"></p>
+                <template x-if="isPdf">
+                    <p class="mt-1 text-sm text-green-400">PDF uploaded successfully!</p>
+                </template>
+                <template x-if="!isPdf">
+                    <p class="mt-1 text-sm text-red-400">Error: Only PDF files are accepted.</p>
+                </template>
+            </div>
+
+            <!-- File Input -->
+            <input type="file" id="fileInput" class="hidden" @change="handleFileSelect($event)" accept=".pdf">
+
+            <!-- Reset Button -->
+            <button x-show="file" x-cloak @click="reset"
+                class="mt-6 px-4 py-2 text-sm font-medium text-white bg-red-600/80 hover:bg-red-600 rounded-lg">
+                Choose another file
+            </button>
+        </div>
+    </div>
+
+
+    <!-- =======================================================FEATURE SECTION================================================== -->
+    <div id="features" class="bg-gray-900 py-24 sm:py-32">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="mx-auto max-w-2xl lg:text-center">
+                <p class="mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl">A Smarter Way to Land Your
+                    Dream Job</p>
+                <p class="mt-6 text-lg/8 text-gray-300">Stop wasting time with generic job boards. Our intelligent
+                    platform is designed to streamline your search, optimize your applications, and get you hired
+                    faster.</p>
+            </div>
+
+            <!-- Redesigned Feature Cards Grid -->
+            <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+                <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+
+                    <!-- Feature 1: Resume Parsing -->
+                    <div
+                        class="flex flex-col items-center text-center p-6 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-500">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                class="h-7 w-7 text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                            </svg>
+                        </div>
+                        <h3 class="mt-5 text-lg font-semibold text-white">Intelligent Resume Parsing</h3>
+                        <p class="mt-2 text-base/7 text-gray-400">Upload your resume, and our AI instantly extracts your
+                            skills and experience to build a powerful profile in seconds.</p>
+                    </div>
+
+                    <!-- Feature 2: Job Recommendations -->
+                    <div
+                        class="flex flex-col items-center text-center p-6 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-500">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                class="h-7 w-7 text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 9v3.75m3-10.5a9 9 0 1 1-6 0 9 9 0 0 1 6 0ZM12 15h.008v.008H12V15Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                            </svg>
+                        </div>
+                        <h3 class="mt-5 text-lg font-semibold text-white">Smart Job Recommendations</h3>
+                        <p class="mt-2 text-base/7 text-gray-400">Our AI goes beyond keywords to find roles that
+                            perfectly match your skills and long-term career goals.</p>
+                    </div>
+
+                    <!-- Feature 3: Save Jobs -->
+                    <div
+                        class="flex flex-col items-center text-center p-6 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-500">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                class="h-7 w-7 text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.5 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
+                            </svg>
+                        </div>
+                        <h3 class="mt-5 text-lg font-semibold text-white">Save & Track Jobs</h3>
+                        <p class="mt-2 text-base/7 text-gray-400">Bookmark promising opportunities with a single click
+                            and keep your entire job search organized in one place.</p>
+                    </div>
+
+                    <!-- Feature 4: ATS Score -->
+                    <div
+                        class="flex flex-col items-center text-center p-6 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-500">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                class="h-7 w-7 text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m15-1.5v-6a6 6 0 1 0-12 0v6a6 6 0 1 0 12 0Z" />
+                            </svg>
+                        </div>
+                        <h3 class="mt-5 text-lg font-semibold text-white">Beat the Bots (Coming Soon)</h3>
+                        <p class="mt-2 text-base/7 text-gray-400">Our ATS Score will analyze your resume against job
+                            descriptions to ensure your application gets seen by a human.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =======================================================ABOUT SECTION================================================== -->
+    <div x-data="{ isMissionModalOpen: false }" @keydown.escape.window="isMissionModalOpen = false">
+        <!-- Your Existing "About" Section -->
+        <div class="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
+            <!-- Background Grid Pattern -->
+            <div aria-hidden="true" class="absolute inset-0 -z-10 flex items-center justify-center overflow-hidden">
+                <div class="w-full h-full opacity-20"
+                    style="background-image: linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 70px 70px;">
+                </div>
+            </div>
+
+            <div id="about" class="mx-auto max-w-7xl px-6 lg:px-8">
+                <div class="mx-auto max-w-2xl lg:mx-0">
+                    <h2 class="text-4xl font-semibold tracking-tight text-white sm:text-5xl">We're Rebuilding the Job
+                        Search.</h2>
+                    <p class="mt-8 text-lg font-medium text-pretty text-gray-300 sm:text-xl/8">At HireLens, we're a team
+                        of technologists and career experts obsessed with one thing: making the job hunt faster &
+                        smarter.</p>
+                </div>
+                <div class="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
+                    <div
+                        class="grid grid-cols-1 gap-x-8 gap-y-6 text-base/7 font-semibold text-white sm:grid-cols-2 md:flex lg:gap-x-10">
+
+                        <!-- Anchor Tag Trigger -->
+                        <a href="#" @click.prevent="isMissionModalOpen = true"
+                            class="hover:text-blue-400 transition-colors">Our mission <span
+                                aria-hidden="true">&rarr;</span></a>
+
+                    </div>
+                    <dl class="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
+                        <div class="flex flex-col-reverse gap-1">
+                            <dt class="text-base/7 text-gray-300">Profiles Created</dt>
+                            <dd class="text-4xl font-semibold tracking-tight text-white">600+</dd>
+                        </div>
+                        <div class="flex flex-col-reverse gap-1">
+                            <dt class="text-base/7 text-gray-300">Resumes Shortlisted</dt>
+                            <dd class="text-4xl font-semibold tracking-tight text-white">250+</dd>
+                        </div>
+                        <div class="flex flex-col-reverse gap-1">
+                            <dt class="text-base/7 text-gray-300">Users Land Interviews</dt>
+                            <dd class="text-4xl font-semibold tracking-tight text-white">100+</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <!-- "Our Mission" Modal -->
+        <div x-show="isMissionModalOpen" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <!-- Backdrop -->
+            <div x-show="isMissionModalOpen" x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0" class="fixed inset-0 bg-black/60 backdrop-blur-sm"
+                @click="isMissionModalOpen = false"></div>
+
+            <!-- Modal Panel -->
+            <div x-show="isMissionModalOpen" x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95"
+                class="relative w-full max-w-2xl max-h-[90vh] bg-gray-800 rounded-2xl shadow-xl flex flex-col"
+                @click.stop>
+                <div class="flex items-center justify-between p-4 border-b border-gray-700">
+                    <h2 class="text-xl font-semibold text-white">Our Mission</h2>
+                    <button @click="isMissionModalOpen = false"
+                        class="p-1 text-gray-400 rounded-full hover:bg-gray-700 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-6 overflow-y-auto modal-content">
+                    <p>The modern job search is broken. Talented candidates are overlooked by automated systems, and
+                        perfect opportunities get lost in the noise. We've all felt the frustration of sending resumes
+                        into a black hole, wondering if they'll ever be seen.</p>
+
+                    <h3>Our Core Purpose</h3>
+                    <p>Our mission is to **put the power back in the hands of the job seeker.** We believe that finding
+                        a fulfilling career shouldn’t be a game of luck; it should be a strategic journey powered by
+                        technology that works *for* you, not against you.</p>
+
+                    <h3>How We Do It</h3>
+                    <p>We leverage advanced AI to give you a definitive competitive edge. We are committed to:</p>
+                    <ul>
+                        <li><strong>Accuracy:</strong> Building your professional profile instantly and accurately from
+                            your resume.</li>
+                        <li><strong>Relevance:</strong> Discovering roles that perfectly align with your skills and
+                            long-term goals, not just keywords.</li>
+                        <li><strong>Empowerment:</strong> Providing you with the tools and insights, like our upcoming
+                            ATS Score, to navigate your job search with confidence and clarity.</li>
+                    </ul>
+                    <p>We're more than a platform; we are a partner in your professional growth. Join us and make your
+                        next career move your best one yet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =======================================================FAQ SECTION================================================== -->
+    <div id="faq-cards" x-data="{ 
+            selectedFaq: null, // No card is open by default
+            faqs: [
+                { q: 'What is HireLens?', a: 'HireLens is your AI-powered career co-pilot. We provide intelligent tools to optimize your resume, discover perfectly matched jobs, and give you a competitive edge to get hired faster.' },
+                { q: 'How is this different from other job portals?', a: 'Our AI instantly builds your profile, looks beyond keywords for better job matches, and helps you optimize your application to get past automated filters—we\'re an intelligent toolkit.' },
+                { q: 'How does the AI Resume Parsing work?', a: 'Simply upload your resume, and our AI instantly extracts your skills and experience to automatically build your complete professional profile in seconds, eliminating the need for manual entry.' },
+                { q: 'Is my personal data and resume safe with you?', a: 'Absolutely. We protect your data with industry-standard encryption. We never share your information without consent, and you have full control to manage or delete your data at any time.' },
+                { q: 'How can I improve my job recommendations?', a: 'Our AI learns from you. For the best recommendations, complete your profile with your latest resume and save jobs that interest you. The more you interact, the smarter it gets.' }
+            ] 
+        }" class="relative isolate bg-gray-900 py-24 sm:py-32">
+        <!-- Background -->
+        <div aria-hidden="true" class="absolute inset-0 -z-10 overflow-hidden">
+            <div class="absolute inset-0"
+                style="background-image: repeating-linear-gradient(rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 100%), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 100%); background-size: 3rem 3rem; -webkit-mask-image: radial-gradient(ellipse at center, black 5%, transparent 60%); mask-image: radial-gradient(ellipse at center, black 5%, transparent 60%);">
+            </div>
+        </div>
+        <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+            <!-- Section Header -->
+            <div class="space-y-3 text-center mb-16">
+                <h1 class="text-4xl sm:text-5xl text-white font-semibold">
+                    Frequently Asked Questions
+                </h1>
+                <p class="text-gray-400 sm:text-xl/8 max-w-lg mx-auto text-lg">
+                    Everything you need to know about HireLens. If you can't find an answer, we're always here to help.
+                </p>
+            </div>
+            <!-- Card Grid Layout -->
+            <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-1 gap-8">
+                <!-- This is a placeholder for an even number of cards. You can remove it if you have an even number. -->
+                <div class="lg:col-span-1 hidden lg:block"></div>
+                <template x-for="(item, index) in faqs" :key="index">
+                    <div @click="selectedFaq = selectedFaq === index ? null : index"
+                        class="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:border-blue-500/50">
+                        <!-- Question Header -->
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold text-white" x-text="item.q"></h3>
+                            <!-- Plus/Minus Icon -->
+                            <div class="flex-shrink-0 ml-4">
+                                <svg x-show="selectedFaq !== index" x-cloak class="h-6 w-6 text-gray-400" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4v16m8-8H4" />
+                                </svg>
+                                <svg x-show="selectedFaq === index" x-cloak class="h-6 w-6 text-blue-400" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M20 12H4" />
+                                </svg>
+                            </div>
+                        </div>
+                        <!-- Answer Panel -->
+                        <div x-show="selectedFaq === index" x-cloak
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 max-h-0"
+                            x-transition:enter-end="opacity-100 max-h-screen"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 max-h-screen"
+                            x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden">
+                            <p class="text-gray-300 pt-4 text-base/7" x-text="item.a"></p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =======================================================FOOTER SECTION================================================== -->
+    <div x-data="{ isPrivacyModalOpen: false, isTermsModalOpen: false }"
+        @keydown.escape.window="isPrivacyModalOpen = false; isTermsModalOpen = false">
+        <footer class="p-8 sm:p-6 -mt-1 bg-gray-800">
+            <div class="mx-auto max-w-screen-xl">
+                <div class="md:flex md:justify-between">
+                    <div class="mb-6 md:mb-0">
+                        <a href="#" class="flex items-center">
+                            <img src="./assets/logo.png" class="mr-3 h-8" alt="HireLens Logo" />
+                            <span
+                                class="self-center text-2xl font-semibold whitespace-nowrap text-white">HireLens</span>
+                        </a>
+                    </div>
+                    <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                        <div>
+                            <h2 class="mb-6 text-sm font-semibold uppercase text-white">Resources</h2>
+                            <ul class="text-gray-400">
+                                <li class="mb-4">
+                                    <a href="#" class="hover:underline">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="hover:underline">Resume Guide</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h2 class="mb-6 text-sm font-semibold uppercase text-white">Follow us</h2>
+                            <ul class="text-gray-400">
+                                <li class="mb-4">
+                                    <a href="#" class="hover:underline ">LinkedIn</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="hover:underline">Twitter / X</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h2 class="mb-6 text-sm font-semibold uppercase text-white">Legal</h2>
+                            <ul class="text-gray-400">
+                                <li class="mb-4">
+                                    <!-- This now opens the privacy modal -->
+                                    <a href="#" @click.prevent="isPrivacyModalOpen = true"
+                                        class="hover:underline">Privacy Policy</a>
+                                </li>
+                                <li>
+                                    <!-- This now opens the terms modal -->
+                                    <a href="#" @click.prevent="isTermsModalOpen = true" class="hover:underline">Terms
+                                        &amp; Conditions</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-6 border-gray-700 sm:mx-auto lg:my-8" />
+                <div class="sm:flex sm:items-center sm:justify-between">
+                    <span class="text-sm text-gray-400 sm:text-center">© 2025 <a href="#"
+                            class="hover:underline">HireLens™</a>. All Rights Reserved.</span>
+                    <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
+                        <!-- Social Icons -->
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Privacy Policy Modal -->
+        <div x-show="isPrivacyModalOpen" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div x-show="isPrivacyModalOpen" x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0" class="fixed inset-0 bg-black/60 backdrop-blur-sm"
+                @click="isPrivacyModalOpen = false"></div>
+            <div x-show="isPrivacyModalOpen" x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95"
+                class="relative w-full max-w-2xl max-h-[90vh] bg-gray-800 rounded-2xl shadow-xl flex flex-col"
+                @click.stop>
+                <div class="flex items-center justify-between p-4 border-b border-gray-700">
+                    <h2 class="text-xl font-semibold text-white">Privacy Policy</h2>
+                    <button @click="isPrivacyModalOpen = false"
+                        class="p-1 text-gray-400 rounded-full hover:bg-gray-700 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-6 overflow-y-auto modal-content">
+                    <p><strong>Effective Date:</strong> September 6, 2025</p>
+                    <h3>Introduction</h3>
+                    <p>Welcome to HireLens. We are committed to protecting your privacy. This Privacy Policy explains
+                        how we collect, use, disclose, and safeguard your information when you use our website and
+                        services.</p>
+                    <h3>Information We Collect</h3>
+                    <p>We may collect personal information you voluntarily provide, including your name, email, and
+                        professional information from your resume/CV such as work history, skills, and education.</p>
+                    <h3>How We Use Your Information</h3>
+                    <p>We use the information we collect to create and manage your account, provide our core services
+                        like AI resume parsing, communicate with you, and improve our platform.</p>
+                    <h3>Data Security</h3>
+                    <p>We implement industry-standard security measures to maintain the safety of your personal
+                        information. Your data is stored on secure servers and protected with encryption.</p>
+                    <h3>Sharing Your Information</h3>
+                    <p>We do not sell or trade your personally identifiable information. We may share data with trusted
+                        third-party services that assist us in operating our website, under strict confidentiality
+                        agreements.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terms & Conditions Modal -->
+        <div x-show="isTermsModalOpen" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div x-show="isTermsModalOpen" x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0" class="fixed inset-0 bg-black/60 backdrop-blur-sm"
+                @click="isTermsModalOpen = false"></div>
+            <div x-show="isTermsModalOpen" x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95"
+                class="relative w-full max-w-2xl max-h-[90vh] bg-gray-800 rounded-2xl shadow-xl flex flex-col"
+                @click.stop>
+                <div class="flex items-center justify-between p-4 border-b border-gray-700">
+                    <h2 class="text-xl font-semibold text-white">Terms & Conditions</h2>
+                    <button @click="isTermsModalOpen = false"
+                        class="p-1 text-gray-400 rounded-full hover:bg-gray-700 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-6 overflow-y-auto modal-content">
+                    <p><strong>Last Updated:</strong> September 6, 2025</p>
+                    <h3>1. Acceptance of Terms</h3>
+                    <p>By accessing and using HireLens, you accept and agree to be bound by these Terms and Conditions.
+                        If you do not agree to these terms, please do not use our services.</p>
+                    <h3>2. User Responsibilities</h3>
+                    <ul>
+                        <li>You are responsible for the accuracy of the information you provide, including your resume
+                            and personal details.</li>
+                        <li>You agree to use our services for lawful purposes only, in a manner that does not infringe
+                            the rights of, or restrict the use of this site by any third party.</li>
+                        <li>You are responsible for maintaining the confidentiality of your account and password.</li>
+                    </ul>
+                    <h3>3. Intellectual Property</h3>
+                    <p>All content on this site, including text, graphics, logos, and software, is the property of
+                        HireLens or its content suppliers and is protected by international copyright laws.</p>
+                    <h3>4. Limitation of Liability</h3>
+                    <p>HireLens provides a platform to connect job seekers with potential opportunities. We are not
+                        responsible for the hiring decisions of any company. Our service is provided "as is" without any
+                        guarantees of employment.</p>
+                    <h3>5. Termination</h3>
+                    <p>We reserve the right to terminate or suspend your account at our discretion, without notice, for
+                        conduct that we believe violates these Terms or is harmful to other users of the site, us, or
+                        third parties.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+<!-- end  -->
+</html>
