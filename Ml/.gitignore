@@ -1,0 +1,7 @@
+.venv/
+model/
+__pycache__/
+*.pyc
+*.pyo
+resumes/
+extracted_resume.json
